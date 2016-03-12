@@ -8,9 +8,20 @@
     "mongoose": "^4.3.6",
     "request": "^2.67.0",
     "twitter": "^1.2.5"
-    },
-    "repository" :
-  { "type" : "git"
-  , "url" : "https://github.com/kottofy/TwitterAzureMLSentimentAnalysis.git"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kottofy/TwitterAzureMLSentimentAnalysis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kottofy/TwitterAzureMLSentimentAnalysis/issues"
+  },
+  "homepage": "https://github.com/kottofy/TwitterAzureMLSentimentAnalysis#readme",
+  "main": "main.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["twitter", "Azure ML", "Text Analysis", "sentiment analysis", "machine learning"],
+  "author": "Kristin Ottofy"
 }
