@@ -91,10 +91,17 @@ function getTweets(query, callback) {
                 "Inputs": batchScoreTweetArray
             }
         , function(tweetArray, scores) {
-                scores.forEach(function(score) {
+                scores.forEach(function(score_obj) {
                     //console.log(score.Score);
                     // console.log(tweetArray);
-                    tweetArray[score.Id].score = score.Score;
+                    var id = score_obj.Id;
+                    var score = score_obj.Score;
+                    
+                    if (score <0.5)
+                        score += ", negative";
+                    else
+                        score +=", positive";
+                    tweetArray[id].score = score;
                    
             });
              callback(tweetArray);  
