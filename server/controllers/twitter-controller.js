@@ -39,11 +39,10 @@ module.exports.list = function(req, res)
 {
     var query = req.query.query;
     getTweets(query, function(tweetArray) {
-        if(tweetArray.length === 10)
-            {
+        console.log("checking tweetArray");
+        console.log(tweetArray);
                 printTweets(tweetArray);
                 res.json(tweetArray);
-            }
     });
 } 
 //****************************************
@@ -61,6 +60,8 @@ function getTweets(query, callback) {
         if (error) {
             throw error;
         };
+           
+        var batchScoreTweetArray = [];
              
         for (var i = 0; i < tweets["statuses"].length; i++ )
         {
@@ -68,19 +69,80 @@ function getTweets(query, callback) {
             var tweetText = tweets["statuses"][i]["text"];
             var tweetUser = tweets["statuses"][i]["user"]["screen_name"];
             var tweet = new Tweet(i, tweetUser, tweetText, "");
+            tweetArray.push(tweet);
+            batchScoreTweetArray[i] = {
+                "Id": i,
+                "Text": tweetText
+            }
             
-            getScore(tweet, function(tweet) {
-                //console.log(tweet);
-                tweetArray.push(tweet);
-                 callback(tweetArray);
-                // printTweets(tweetArray);
-                
-            });  
-         
+        // for single scoring...
+            // getScore(tweet, function(tweet) {
+            //     //console.log(tweet);
+            //     tweetArray.push(tweet);
+            //      callback(tweetArray);
+            //     // printTweets(tweetArray);   
+            // });  
+
         }
+        
+        //console.log(batchScoreTweetArray);
+        getBatchScore(tweetArray, 
+            {
+                "Inputs": batchScoreTweetArray
+            }
+        , function(tweetArray, scores) {
+                scores.forEach(function(score) {
+                    //console.log(score.Score);
+                    // console.log(tweetArray);
+                    tweetArray[score.Id].score = score.Score;
+                   
+            });
+             callback(tweetArray);  
+        });
+        
+      
+        
     });
 }; //end getTweets function
 
+
+
+/*************** REQUEST BODY ****************
+{"Inputs":
+[
+    {"Id":"1","Text":"hello world"},
+    {"Id":"2","Text":"hello foo world"},
+    {"Id":"3","Text":"hello my world"},
+]}
+ ************************************************/
+
+function getBatchScore(tweetArray, req_body, callback) {
+    console.log("getting batch scores");
+    var url = "https://api.datamarket.azure.com/data.ashx/amla/text-analytics/v1/GetSentimentBatch"
+
+     request.post({
+         url: url,
+            'auth': {
+                'user': 'AccountKey',
+                'pass': accountKey,
+                'sendImmediately': false
+            },
+            json: true,
+            body: req_body
+        }, 
+        function (error, response, body) {
+            //console.log(body.SentimentBatch);
+            callback(tweetArray, body.SentimentBatch);
+            // if (response.statusCode === 200)
+            //     {
+            //         console.log(response);
+            //     }
+            //     else
+            //     {
+            //         console.log(error);
+            //     }  
+        });
+}
 
 
 function getScore(tweet, callback) {
