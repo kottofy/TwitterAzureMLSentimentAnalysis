@@ -1,22 +1,60 @@
 <!DOCTYPE html>
 <html ng-app="twitterApp">
     <head>
-        <title>Kristin Ottofy Twitter Wiki AzureML</title>
+        <title>Kristin Ottofy Twitter AzureML Sentiment Analysis</title>
         <meta name="description" content="awesome app">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link href="/css/styles.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+        
     </head>
     <body>
+        
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class=""><h2 class="link"><a class="navbar-left" href="http://kristinottofytwitterazuremlsentimentanalysis.azurewebsites.net/">Home</a><span></span></h2></li>
+                        <!--<li><h2 class="link"><a href="">About</a><span></span></h2></li>-->
+                        <li><h2 class="link"><a href="https://github.com/kottofy/TwitterAzureMLSentimentAnalysis">Code</a><span></span></h2></li>
+                        <li><h2 class="link"><a href="http://kristinottofy.com">Author</a><span></span></h2></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="row header-content">
+            <h1>Kristin Ottofy's Twitter Azure ML Sentiment Analysis</h1>
+        </div>
+        
         <div class="container">
             <div ng-controller="tweetsController"> 
-                <form ng-submit="search()">
-                    <input type="text" ng-model="query" placeholder="Search"/><br />
-                    <button type="submit">Search</button>
-                </form>
+                <div class="row-fluid form-content">
+                    <form ng-submit="search()">
+                        <input class="form-control" type="text" ng-model="query" placeholder="Search" required/><br />
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
                 
-                <h1>Tweets</h1>
+                    <!--<div class="row-fluid form-content">
+                        <form action="/" method="GET">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." ng-model="query" id="query" name="query" required>
+                            </div>
+                            <input type="submit" ng-click="search()" value="Save" />
+                        </form>
+                    </div>     -->
+                
                 <div class="row">
-                    <div class="col-md-6" ng-repeat="tweet in tweets"> 
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 tweet-content" ng-repeat="tweet in tweets"> 
                         <h3>@{{tweet.user}}, {{tweet.score}}</h3>
                         <h4>{{tweet.text}}</h4>
                     </div>

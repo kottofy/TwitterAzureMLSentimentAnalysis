@@ -39,10 +39,10 @@ module.exports.list = function(req, res)
 {
     var query = req.query.query;
     getTweets(query, function(tweetArray) {
-        console.log("checking tweetArray");
-        console.log(tweetArray);
-                printTweets(tweetArray);
-                res.json(tweetArray);
+        //console.log("checking tweetArray");
+        //console.log(tweetArray);
+        //printTweets(tweetArray);
+        res.json(tweetArray);
     });
 } 
 //****************************************
@@ -124,7 +124,7 @@ function getTweets(query, callback) {
  ************************************************/
 
 function getBatchScore(tweetArray, req_body, callback) {
-    console.log("getting batch scores");
+    //console.log("getting batch scores");
     var url = "https://api.datamarket.azure.com/data.ashx/amla/text-analytics/v1/GetSentimentBatch"
 
      request.post({
@@ -203,10 +203,10 @@ function getScore(tweet, callback) {
                
                
                 
-function callRes(tweetArray, res) {
-    console.log("LAST. call res.json");
-    res.json(tweetArray);
-};
+// function callRes(tweetArray, res) {
+//     //console.log("LAST. call res.json");
+//     res.json(tweetArray);
+// };
 
 
 

@@ -9,6 +9,7 @@ app.get('/', function(req, res) {
 
 
 app.use('/js', express.static(__dirname + '/client/js'));
+app.use('/css', express.static(__dirname + '/client/css'));
 
 //REST API
 app.get('/api/tweets', tweetsController.list);
@@ -18,5 +19,5 @@ app.get('/api/tweets', tweetsController.list);
 var port = process.env.PORT || 3000;
 
 app.listen(port, function() {
-    console.log("I'm listening...");
+    console.log("I'm listening on port: " + port);
 });
