@@ -14,7 +14,7 @@ catch (err) {
 }
 
 var twitterCreds = config.Twitter;
-var accountKey = config.Wikipedia.accountKey;
+var accountKey = config.AzureML.accountKey;
 var client = new Twitter({
         consumer_key: twitterCreds.consumer_key,
         consumer_secret: twitterCreds.consumer_secret,

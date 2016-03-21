@@ -1,7 +1,7 @@
 {
   "name": "twitterazureml",
-  "version": "0.0.1",
-  "description": "Search Tweets in Azure ML's Text Analysis",
+  "version": "1.0.0",
+  "description": "Search Tweets and score in Azure ML's Text Analysis",
   "license": "MIT",
   "dependencies": {
     "express": "^4.13.4",

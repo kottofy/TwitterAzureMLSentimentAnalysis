@@ -13,7 +13,6 @@ app.use('/css', express.static(__dirname + '/client/css'));
 
 //REST API
 app.get('/api/tweets', tweetsController.list);
-// app.post('/api/meetups', meetupsController.create);
 
 
 var port = process.env.PORT || 3000;
